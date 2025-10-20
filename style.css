@@ -4,7 +4,7 @@
 :root {
     --primary-color: #000a1a; /* 深藍黑 */
     --secondary-color: #0d1a2f; /* 次深藍黑 */
-    --accent-gold: #FFD700; /* 黃金 */
+    --accent-gold: #fff9b3; /* 香檳金 */
     --text-light: #E0E0E0; /* 淺灰色文字 */
     --text-dark: #A0A0A0; /* 深灰色文字 */
     --border-dark: #3a4b63; /* 深邊框 */
@@ -12,7 +12,7 @@
 
 body {
     margin: 0;
-    font-family: 'Noto Sans TC', sans-serif; /* 中文主要字體 */
+    font-family: 'Noto Serif TC', sans-serif; /* 中文主要字體 */
     color: var(--text-light);
     line-height: 1.6;
     background: linear-gradient(to bottom, var(--primary-color) 0%, var(--secondary-color) 100%);
@@ -39,20 +39,20 @@ body {
 
 /* 星星背景 - 基礎靜態星星 */
 .stars {
-    background: #000 url('./stars.png') repeat top center; /* 這裡假設您有 stars.png，如果沒有可移除此行 */
+    background: #000 url('./twinkling.gif') repeat top center; /* 這裡假設您有 stars.png，如果沒有可移除此行 */
     opacity: 0.7;
 }
 
 /* 閃爍效果 - 動態星星 */
 .twinkling {
-    background: transparent url('./twinkling.png') repeat top center; /* 這裡假設您有 twinkling.png，如果沒有可移除此行 */
+    /* background: transparent url('./booking/twinkling.gif') repeat top center; 這裡假設您有 twinkling.png，如果沒有可移除此行 */
     animation: move-background 200s linear infinite; /* 背景緩慢移動，模擬視差 */
     opacity: 0.5;
 }
 
 /* 雲層效果 - 增加層次感 */
 .clouds {
-    background: transparent url('./clouds.png') repeat top center; /* 這裡假設您有 clouds.png，如果沒有可移除此行 */
+    /* background: transparent url('./booking/clouds.png') repeat top center; 這裡假設您有 clouds.png，如果沒有可移除此行 */
     animation: move-background 150s linear infinite;
     opacity: 0.3;
 }
@@ -97,7 +97,7 @@ body {
 }
 
 h1 {
-    font-family: 'Orbitron', sans-serif; /* 科幻風格標題 */
+    font-family: 'Noto Serif TC', sans-serif; /* 科幻風格標題 */
     color: var(--accent-gold);
     text-align: center;
     margin-bottom: 20px;
@@ -113,7 +113,7 @@ h1 {
 }
 
 h2 {
-    font-family: 'Orbitron', sans-serif;
+    font-family: 'Noto Serif TC', sans-serif;
     color: var(--accent-gold);
     border-bottom: 2px solid var(--accent-gold);
     padding-bottom: 10px;
