@@ -1,0 +1,287 @@
+/* 引入 Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Noto+Sans+TC:wght@300;400;700&display=swap');
+
+:root {
+    --primary-color: #000a1a; /* 深藍黑 */
+    --secondary-color: #0d1a2f; /* 次深藍黑 */
+    --accent-gold: #FFD700; /* 黃金 */
+    --text-light: #E0E0E0; /* 淺灰色文字 */
+    --text-dark: #A0A0A0; /* 深灰色文字 */
+    --border-dark: #3a4b63; /* 深邊框 */
+}
+
+body {
+    margin: 0;
+    font-family: 'Noto Sans TC', sans-serif; /* 中文主要字體 */
+    color: var(--text-light);
+    line-height: 1.6;
+    background: linear-gradient(to bottom, var(--primary-color) 0%, var(--secondary-color) 100%);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow-x: hidden;
+    position: relative;
+}
+
+/* 讓星星和雲層可以覆蓋整個頁面 */
+.stars, .twinkling, .clouds {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    display: block;
+    z-index: -1; /* 確保在表單下方 */
+}
+
+/* 星星背景 - 基礎靜態星星 */
+.stars {
+    background: #000 url('./stars.png') repeat top center; /* 這裡假設您有 stars.png，如果沒有可移除此行 */
+    opacity: 0.7;
+}
+
+/* 閃爍效果 - 動態星星 */
+.twinkling {
+    background: transparent url('./twinkling.png') repeat top center; /* 這裡假設您有 twinkling.png，如果沒有可移除此行 */
+    animation: move-background 200s linear infinite; /* 背景緩慢移動，模擬視差 */
+    opacity: 0.5;
+}
+
+/* 雲層效果 - 增加層次感 */
+.clouds {
+    background: transparent url('./clouds.png') repeat top center; /* 這裡假設您有 clouds.png，如果沒有可移除此行 */
+    animation: move-background 150s linear infinite;
+    opacity: 0.3;
+}
+
+/* 如果沒有圖片，可以用 CSS 畫星星 (較複雜，以下僅為概念) */
+/* .stars::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at 10% 20%, #fff 1px, transparent 1px),
+                radial-gradient(circle at 70% 80%, #fff 0.5px, transparent 0.5px),
+                radial-gradient(circle at 40% 60%, #fff 1.5px, transparent 1.5px);
+    background-size: 100px 100px;
+    animation: twinkle 5s infinite alternate;
+} */
+
+
+@keyframes move-background {
+    from {
+        transform: translate3d(0, 0, 0);
+    }
+    to {
+        transform: translate3d(-10000px, 0, 0); /* 模擬背景移動 */
+    }
+}
+
+/* 主要容器，表單居中 */
+.container {
+    background-color: rgba(13, 26, 47, 0.9); /* 半透明背景，讓星空若隱若現 */
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.5), 0 0 60px var(--accent-gold); /* 陰影和金色光暈 */
+    max-width: 800px;
+    width: 90%;
+    box-sizing: border-box;
+    position: relative;
+    z-index: 1; /* 確保在星星上方 */
+    margin: 50px auto; /* 上下外邊距 */
+}
+
+h1 {
+    font-family: 'Orbitron', sans-serif; /* 科幻風格標題 */
+    color: var(--accent-gold);
+    text-align: center;
+    margin-bottom: 20px;
+    text-shadow: 0 0 10px rgba(255, 215, 0, 0.7); /* 金色文字陰影 */
+    font-size: 2.5em;
+}
+
+.slogan {
+    text-align: center;
+    color: var(--text-dark);
+    font-size: 1.1em;
+    margin-bottom: 30px;
+}
+
+h2 {
+    font-family: 'Orbitron', sans-serif;
+    color: var(--accent-gold);
+    border-bottom: 2px solid var(--accent-gold);
+    padding-bottom: 10px;
+    margin-top: 40px;
+    margin-bottom: 25px;
+    font-size: 1.8em;
+    text-shadow: 0 0 5px rgba(255, 215, 0, 0.5);
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: var(--text-light);
+}
+
+input[type="text"],
+input[type="tel"],
+input[type="number"],
+input[type="datetime-local"],
+textarea {
+    width: calc(100% - 24px); /* 考慮 padding 和 border */
+    padding: 12px;
+    border: 2px solid var(--accent-gold); /* 金色邊框 */
+    border-radius: 8px;
+    background-color: var(--secondary-color); /* 輸入框背景色 */
+    color: var(--text-light);
+    font-size: 1em;
+    box-shadow: 0 0 8px rgba(255, 215, 0, 0.3); /* 金色光暈效果 */
+    transition: all 0.3s ease;
+}
+
+input[type="text"]:focus,
+input[type="tel"]:focus,
+input[type="number"]:focus,
+input[type="datetime-local"]:focus,
+textarea:focus {
+    outline: none;
+    border-color: #FFEA00; /* 聚焦時邊框更亮 */
+    box-shadow: 0 0 12px rgba(255, 215, 0, 0.6);
+    background-color: #1a2f4a; /* 聚焦時背景稍微變淺 */
+}
+
+textarea {
+    resize: vertical; /* 允許垂直調整大小 */
+    min-height: 100px;
+}
+
+/* 針對 radio 和 checkbox */
+.radio-group label, .checkbox-group label {
+    display: inline-block;
+    margin-right: 20px;
+    margin-bottom: 10px;
+    font-weight: normal;
+    cursor: pointer;
+}
+
+input[type="radio"],
+input[type="checkbox"] {
+    margin-right: 8px;
+    transform: scale(1.2); /* 放大單選/複選框 */
+    accent-color: var(--accent-gold); /* 改變選中顏色 */
+}
+
+.inline-input {
+    width: auto;
+    display: inline-block;
+    margin-left: 10px;
+}
+
+.reminders {
+    background-color: rgba(255, 215, 0, 0.1); /* 金色透明背景 */
+    border-left: 5px solid var(--accent-gold);
+    padding: 20px;
+    margin-top: 40px;
+    border-radius: 5px;
+}
+
+.reminders h3 {
+    color: var(--accent-gold);
+    font-family: 'Orbitron', sans-serif;
+    margin-top: 0;
+    font-size: 1.4em;
+}
+
+.reminders p {
+    color: var(--text-light);
+    margin-bottom: 10px;
+}
+
+.footer-info {
+    text-align: center;
+    margin-top: 40px;
+    color: var(--text-dark);
+    font-size: 0.9em;
+}
+
+.footer-info p {
+    margin: 5px 0;
+}
+
+
+.submit-btn {
+    display: block;
+    width: 80%;
+    margin: 40px auto 20px auto;
+    padding: 15px 30px;
+    background: linear-gradient(to right, #FFEA00, var(--accent-gold)); /* 金色漸層按鈕 */
+    color: var(--primary-color); /* 深色文字 */
+    border: none;
+    border-radius: 50px; /* 圓角膠囊形按鈕 */
+    font-size: 1.5em;
+    font-weight: bold;
+    font-family: 'Orbitron', sans-serif;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 15px rgba(255, 215, 0, 0.5); /* 金色陰影 */
+}
+
+.submit-btn:hover {
+    background: linear-gradient(to right, var(--accent-gold), #FFEA00); /* 懸停時顏色反轉 */
+    transform: translateY(-3px) scale(1.02); /* 輕微上浮和放大 */
+    box-shadow: 0 8px 20px rgba(255, 215, 0, 0.7);
+}
+
+/* RWD 響應式設計 */
+@media (max-width: 768px) {
+    .container {
+        padding: 25px;
+        width: 95%;
+    }
+    h1 {
+        font-size: 2em;
+    }
+    h2 {
+        font-size: 1.5em;
+    }
+    .submit-btn {
+        width: 90%;
+        font-size: 1.3em;
+        padding: 12px 25px;
+    }
+    input[type="text"],
+    input[type="tel"],
+    input[type="number"],
+    input[type="datetime-local"],
+    textarea {
+        width: calc(100% - 20px); /* 調整 padding */
+    }
+}
+
+@media (max-width: 480px) {
+    h1 {
+        font-size: 1.8em;
+    }
+    h2 {
+        font-size: 1.3em;
+    }
+    .slogan {
+        font-size: 1em;
+    }
+    .radio-group label, .checkbox-group label {
+        display: block; /* 在小螢幕上讓選項垂直排列 */
+        margin-right: 0;
+        margin-bottom: 8px;
+    }
+}
