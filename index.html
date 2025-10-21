@@ -188,61 +188,48 @@
                 alert('連線錯誤，請檢查網路或直接聯繫使者。');
             });
         });
-document.getElementById('appointmentForm').addEventListener('submit', async function(e) {
-    e.preventDefault();
+<script>
+<script>
+document.getElementById('appointmentForm').addEventListener('submit', function(e) {
+    e.preventDefault(); // 阻止表單傳統提交
 
     const form = e.target;
-    function getCheckboxValues(name) {
-        return Array.from(form.querySelectorAll(`input[name="${name}"]:checked`))
-                    .map(input => input.value).join(', ');
-    }
-    function getRadioValue(name) {
-        const checked = form.querySelector(`input[name="${name}"]:checked`);
-        return checked ? checked.value : '';
-    }
+    const formData = new FormData(form);
+    const data = {};
 
-    const data = {
-        missionType: getCheckboxValues('missionType'),
-        startDate: form.startDate.value,
-        endDate: form.endDate.value,
-        petName: form.petName.value,
-        gender: getRadioValue('gender'),
-        neutered: getRadioValue('neutered'),
-        breed: form.breed.value,
-        weight: form.weight.value,
-        age: form.age.value,
-        health: getRadioValue('health'),
-        healthDetail: form.healthDetail.value || '',
-        personality: getCheckboxValues('personality'),
-        otherPersonality: form.otherPersonality.value || '',
-        specialBehavior: getCheckboxValues('specialBehavior'),
-        otherBehavior: form.otherBehavior.value || '',
-        ownerName: form.ownerName.value,
-        phone: form.phone.value,
-        address: form.address.value,
-        experience: getRadioValue('experience'),
-        agreement: getRadioValue('agreement'),
-        notes: form.notes.value || ''
-    };
-
-    try {
-        const response = await fetch('/send-line', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(data)
-        });
-        if(response.ok){
-            alert('預約資料已送出！毛托邦使者將收到 LINE 訊息 ✨');
-            form.reset();
+    // 將表單欄位整理成物件
+    for (const [key, value] of formData.entries()) {
+        if (data[key]) {
+            // 如果已經有這個欄位（多選框），合併成陣列
+            if (Array.isArray(data[key])) {
+                data[key].push(value);
+            } else {
+                data[key] = [data[key], value];
+            }
         } else {
-            alert('送出失敗，請稍後再試。');
+            data[key] = value;
         }
-    } catch (err) {
-        console.error(err);
-        alert('送出發生錯誤！');
     }
+
+    // 發送 POST 請求到 Render 後端
+    fetch("https://maotopia-booking.onrender.com/booking", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data)
+    })
+    .then(res => res.json())
+    .then(res => {
+        alert(res.message); // 顯示後端回傳訊息
+        form.reset(); // 清空表單
+    })
+    .catch(err => {
+        console.error(err);
+        alert("提交失敗，請稍後再試。");
+    });
 });
 </script>
 
+
 </body>
 </html>
+
