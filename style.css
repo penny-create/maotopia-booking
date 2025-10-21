@@ -1,10 +1,11 @@
 /* 引入 Google Fonts */
-@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Noto+Sans+TC:wght@300;400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;700&display=swap');
+
 
 :root {
     --primary-color: #000a1a; /* 深藍黑 */
     --secondary-color: #0d1a2f; /* 次深藍黑 */
-    --accent-gold: #fff9b3; /* 香檳金 */
+    --accent-gold: #f0e399; /* 黃金 */
     --text-light: #E0E0E0; /* 淺灰色文字 */
     --text-dark: #A0A0A0; /* 深灰色文字 */
     --border-dark: #3a4b63; /* 深邊框 */
@@ -45,14 +46,14 @@ body {
 
 /* 閃爍效果 - 動態星星 */
 .twinkling {
-    /* background: transparent url('./booking/twinkling.gif') repeat top center; 這裡假設您有 twinkling.png，如果沒有可移除此行 */
+    /* background: transparent url('./twinkling.png') repeat top center; 這裡假設您有 twinkling.png，如果沒有可移除此行 */
     animation: move-background 200s linear infinite; /* 背景緩慢移動，模擬視差 */
     opacity: 0.5;
 }
 
 /* 雲層效果 - 增加層次感 */
 .clouds {
-    /* background: transparent url('./booking/clouds.png') repeat top center; 這裡假設您有 clouds.png，如果沒有可移除此行 */
+    /* background: transparent url('./clouds.png') repeat top center; 這裡假設您有 clouds.png，如果沒有可移除此行 */
     animation: move-background 150s linear infinite;
     opacity: 0.3;
 }
@@ -198,7 +199,7 @@ input[type="checkbox"] {
 
 .reminders h3 {
     color: var(--accent-gold);
-    font-family: 'Orbitron', sans-serif;
+    font-family: 'Noto Serif CJK', sans-serif;
     margin-top: 0;
     font-size: 1.4em;
 }
