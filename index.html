@@ -11,7 +11,7 @@
     <div class="stars"></div>
     <div class="twinkling"></div>
     <div class="clouds"></div> <div class="container">
-        <h1>毛托邦星際登艦預約表 ✈️</h1>
+        <h1>毛 托 邦 星 際 登 艦 預 約 表 🚀</h1>
         <p class="slogan">
             歡迎登艦！請協助我們完成您的星際旅程申請，<br>
             讓毛托邦的使者能為您的毛孩準備最完美的星球假期 🌟
@@ -188,6 +188,61 @@
                 alert('連線錯誤，請檢查網路或直接聯繫使者。');
             });
         });
-    </script>
+document.getElementById('appointmentForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
+
+    const form = e.target;
+    function getCheckboxValues(name) {
+        return Array.from(form.querySelectorAll(`input[name="${name}"]:checked`))
+                    .map(input => input.value).join(', ');
+    }
+    function getRadioValue(name) {
+        const checked = form.querySelector(`input[name="${name}"]:checked`);
+        return checked ? checked.value : '';
+    }
+
+    const data = {
+        missionType: getCheckboxValues('missionType'),
+        startDate: form.startDate.value,
+        endDate: form.endDate.value,
+        petName: form.petName.value,
+        gender: getRadioValue('gender'),
+        neutered: getRadioValue('neutered'),
+        breed: form.breed.value,
+        weight: form.weight.value,
+        age: form.age.value,
+        health: getRadioValue('health'),
+        healthDetail: form.healthDetail.value || '',
+        personality: getCheckboxValues('personality'),
+        otherPersonality: form.otherPersonality.value || '',
+        specialBehavior: getCheckboxValues('specialBehavior'),
+        otherBehavior: form.otherBehavior.value || '',
+        ownerName: form.ownerName.value,
+        phone: form.phone.value,
+        address: form.address.value,
+        experience: getRadioValue('experience'),
+        agreement: getRadioValue('agreement'),
+        notes: form.notes.value || ''
+    };
+
+    try {
+        const response = await fetch('/send-line', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(data)
+        });
+        if(response.ok){
+            alert('預約資料已送出！毛托邦使者將收到 LINE 訊息 ✨');
+            form.reset();
+        } else {
+            alert('送出失敗，請稍後再試。');
+        }
+    } catch (err) {
+        console.error(err);
+        alert('送出發生錯誤！');
+    }
+});
+</script>
+
 </body>
 </html>
