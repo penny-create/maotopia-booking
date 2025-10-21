@@ -190,17 +190,15 @@
         });
 <script>
 <script>
-document.getElementById('appointmentForm').addEventListener('submit', function(e) {
-    e.preventDefault(); // 阻止表單傳統提交
+document.getElementById('appointmentForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
 
-    const form = e.target;
-    const formData = new FormData(form);
+    const formData = new FormData(this);
     const data = {};
 
-    // 將表單欄位整理成物件
-    for (const [key, value] of formData.entries()) {
+    // 處理多選、單選
+    formData.forEach((value, key) => {
         if (data[key]) {
-            // 如果已經有這個欄位（多選框），合併成陣列
             if (Array.isArray(data[key])) {
                 data[key].push(value);
             } else {
@@ -209,27 +207,28 @@ document.getElementById('appointmentForm').addEventListener('submit', function(e
         } else {
             data[key] = value;
         }
-    }
-
-    // 發送 POST 請求到 Render 後端
-    fetch("https://maotopia-booking.onrender.com/booking", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data)
-    })
-    .then(res => res.json())
-    .then(res => {
-        alert(res.message); // 顯示後端回傳訊息
-        form.reset(); // 清空表單
-    })
-    .catch(err => {
-        console.error(err);
-        alert("提交失敗，請稍後再試。");
     });
+
+    try {
+        const res = await fetch('https://maotopia-booking.onrender.com/booking', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(data)
+        });
+
+        const result = await res.json();
+        alert(result.message); // 顯示成功訊息
+        this.reset(); // 清空表單
+    } catch (err) {
+        console.error(err);
+        alert('送出失敗，請稍後再試');
+    }
 });
 </script>
 
 
+
 </body>
 </html>
+
 
