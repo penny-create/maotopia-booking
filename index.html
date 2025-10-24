@@ -164,16 +164,24 @@
     }
   });
 
-    document.getElementById("testbutton").addEventListener("click", function() {
-      console.log("按鈕被點擊了！");
-         try {        
-          const res = await fetch("https://maotopia-api.onrender.com/, {
-          method: "GET"
-        });
-    });
+  document.getElementById("testbutton").addEventListener("click", async function () {
+    console.log("按鈕被點擊了！");
+    try {
+      const res = await fetch("https://maotopia-api.onrender.com/", {
+        method: "GET"
+      });
+
+      // 嘗試解析回應
+      const data = await res.json();
+      console.log("伺服器回應：", data);
+    } catch (err) {
+      console.error("發生錯誤：", err);
+    }
+  });
   </script>
 </body>
 </html>
+
 
 
 
