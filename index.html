@@ -166,13 +166,20 @@ document.getElementById("testbutton").addEventListener("click", function () {
   console.log("按鈕被點擊了！");
   const form = document.getElementById("appointmentForm");
   
-  // 取得表單資料
-  const formData = new FormData(form);
-  const data = Object.fromEntries(formData.entries());
-  
-  // 處理多選 missionType
-  data.missionType = Array.from(form.querySelectorAll('input[name="missionType"]:checked'))
-                          .map(el => el.value);
+// 取得表單資料
+const formData = new FormData(e.target);
+const data = {};
+
+// ✅ 通用處理所有多選 checkbox
+for (let [key, value] of formData.entries()) {
+  if (data[key]) {
+    // 如果已有值 → 變成陣列
+    if (!Array.isArray(data[key])) data[key] = [data[key]];
+    data[key].push(value);
+  } else {
+    data[key] = value;
+  }
+}
   
   // 加上使用者 ID
   data.userId = userId;
@@ -196,6 +203,7 @@ document.getElementById("testbutton").addEventListener("click", function () {
   </script>
 </body>
 </html>
+
 
 
 
