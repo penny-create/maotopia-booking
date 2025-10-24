@@ -167,21 +167,14 @@
     document.getElementById("testbutton").addEventListener("click", function() {
       console.log("按鈕被點擊了！");
          try {        
-          const res = await fetch("https://api.line.me/v2/bot/message/push", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            "Authorization": `Bearer ${LINE_TOKEN}`
-          },
-          body: JSON.stringify({
-            to: "U592d419aa2916273dc31002d18950a02",
-            messages: [{ type: "text", text: "123" }]
-          })
+          const res = await fetch("https://maotopia-api.onrender.com/, {
+          method: "GET"
         });
     });
   </script>
 </body>
 </html>
+
 
 
 
