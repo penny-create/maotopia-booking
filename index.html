@@ -138,7 +138,7 @@
                 <p>☎️ 聯絡使者：[您的聯絡電話]</p>
             </div>
 
-            <button type="submit" class="submit-btn">完成登艦預約</button>
+            <button type="button" id="testbutton" class="submit-btn">完成登艦預約</button>
         </form>
     </div>
 <script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
@@ -164,35 +164,25 @@
     }
   });
 
-  document.getElementById('appointmentForm').addEventListener('submit', async (e) => {
-    e.preventDefault();
-    const formData = new FormData(e.target);
-    formData.append('userId', userId);
-    const data = Object.fromEntries(formData.entries());
-    console.log(data);
-    try {        
-      const res = await fetch("https://api.line.me/v2/bot/message/push", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization": `Bearer ${LINE_TOKEN}`
-      },
-      body: JSON.stringify({
-        to: "U592d419aa2916273dc31002d18950a02",
-        messages: [{ type: "text", text: data }]
-      })
+    document.getElementById("testbutton").addEventListener("click", function() {
+      console.log("按鈕被點擊了！");
+         try {        
+          const res = await fetch("https://api.line.me/v2/bot/message/push", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${LINE_TOKEN}`
+          },
+          body: JSON.stringify({
+            to: "U592d419aa2916273dc31002d18950a02",
+            messages: [{ type: "text", text: "123" }]
+          })
+        });
     });
-      const result = await res.json();
-      alert(result.message || '送出成功！');
-      e.target.reset();
-    } catch (err) {
-      console.error(err);
-      alert('送出失敗，請稍後再試');
-    }
-  });
   </script>
 </body>
 </html>
+
 
 
 
