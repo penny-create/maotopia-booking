@@ -211,11 +211,63 @@
             });
         });
 <script>
+<script>
+let userId = '';
+
+document.addEventListener('DOMContentLoaded', async () => {
+  try {
+    await liff.init({ liffId: '2008333754-ODxKZRr9' });
+    console.log('✅ LIFF 初始化成功');
+
+    if (!liff.isLoggedIn()) {
+      liff.login();
+      return;
+    }
+
+    const profile = await liff.getProfile();
+    userId = profile.userId; // 👈 取得使用者 LINE ID
+    document.getElementById('ownerName').value = profile.displayName || '';
+  } catch (err) {
+    console.error('❌ LIFF 初始化失敗:', err);
+  }
+});
+
+document.getElementById('appointmentForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+
+  const form = e.target;
+  const formData = new FormData(form);
+  const data = Object.fromEntries(formData.entries());
+  data.userId = userId; // 👈 把 LINE userId 一起送到後端
+
+  const WEB_APP_URL = '你的 Google Apps Script 部署網址'; // ⚠️ 改這裡！
+
+  fetch(WEB_APP_URL, {
+    method: 'POST',
+    contentType: 'application/json',
+    body: JSON.stringify(data)
+  })
+  .then(res => res.json())
+  .then(result => {
+    if (result.status === 'success') {
+      alert('登艦預約成功！已通知毛托邦使者 🌟');
+      form.reset();
+    } else {
+      alert('❌ 錯誤：' + result.message);
+    }
+  })
+  .catch(err => {
+    console.error(err);
+    alert('連線失敗，請稍後再試。');
+  });
+});
+</script>
 
 
 
 </body>
 </html>
+
 
 
 
