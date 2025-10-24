@@ -56,3 +56,5 @@ function formatLineMessage(data) {
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+liff.init({ liffId: '2008333754-ODxKZRr9' })
+
