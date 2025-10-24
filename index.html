@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>毛托邦星際登艦預約🚀</title>
+    <title>毛托邦星際登艦預約</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Noto+Sans+TC:wght@300;400;700&display=swap" rel="stylesheet">
 </head>
@@ -15,7 +15,6 @@
         <p class="slogan">
             歡迎登艦！請協助我們完成您的星際旅程申請，<br>
             讓毛托邦的使者能為您的毛孩準備最完美的星球假期 🌟
-            !!請注意!!一份表單僅供一隻毛孩填寫喔!
         </p>
 
         <form id="appointmentForm" action="#" method="POST" class="star-form">
@@ -167,13 +166,13 @@ document.getElementById("testbutton").addEventListener("click", function () {
   console.log("按鈕被點擊了！");
   const form = document.getElementById("appointmentForm");
   
-// 取得表單資料 
-    const formData = new FormData(form); 
-    const data = Object.fromEntries(formData.entries()); 
-// 處理多選 
-    missionType data.missionType = 
-    Array.from(form.querySelectorAll('input[name="missionType"]:checked')) 
-    .map(el => el.value);
+  // 取得表單資料
+  const formData = new FormData(form);
+  const data = Object.fromEntries(formData.entries());
+  
+  // 處理多選 missionType
+  data.missionType = Array.from(form.querySelectorAll('input[name="missionType"]:checked'))
+                          .map(el => el.value);
   
   // 加上使用者 ID
   data.userId = userId;
@@ -197,13 +196,6 @@ document.getElementById("testbutton").addEventListener("click", function () {
   </script>
 </body>
 </html>
-
-
-
-
-
-
-
 
 
 
