@@ -211,7 +211,7 @@ document.getElementById('appointmentForm').addEventListener('submit', async func
 
     try {
         const res = await fetch('https://maotopia-booking.onrender.com/booking', {
-            method: 'POST',
+            method: 'GET',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(data)
         });
@@ -230,5 +230,6 @@ document.getElementById('appointmentForm').addEventListener('submit', async func
 
 </body>
 </html>
+
 
 
