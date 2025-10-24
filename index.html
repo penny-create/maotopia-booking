@@ -11,7 +11,7 @@
     <div class="stars"></div>
     <div class="twinkling"></div>
     <div class="clouds"></div> <div class="container">
-        <h1>毛 托 邦 星 際 登 艦 預 約 表 🚀</h1>
+        <h1>毛 托 邦 星 際 登 艦 預 約 表 </h1>
         <p class="slogan">
             歡迎登艦！請協助我們完成您的星際旅程申請，<br>
             讓毛托邦的使者能為您的毛孩準備最完美的星球假期 🌟
@@ -167,20 +167,13 @@ document.getElementById("testbutton").addEventListener("click", function () {
   console.log("按鈕被點擊了！");
   const form = document.getElementById("appointmentForm");
   
-// 取得表單資料
-const formData = new FormData(e.target);
-const data = {};
-
-// ✅ 通用處理所有多選 checkbox
-for (let [key, value] of formData.entries()) {
-  if (data[key]) {
-    // 如果已有值 → 變成陣列
-    if (!Array.isArray(data[key])) data[key] = [data[key]];
-    data[key].push(value);
-  } else {
-    data[key] = value;
-  }
-}
+// 取得表單資料 
+    const formData = new FormData(form); 
+    const data = Object.fromEntries(formData.entries()); 
+// 處理多選 
+    missionType data.missionType = 
+    Array.from(form.querySelectorAll('input[name="missionType"]:checked')) 
+    .map(el => el.value);
   
   // 加上使用者 ID
   data.userId = userId;
@@ -204,6 +197,7 @@ for (let [key, value] of formData.entries()) {
   </script>
 </body>
 </html>
+
 
 
 
