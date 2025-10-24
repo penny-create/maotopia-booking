@@ -144,7 +144,7 @@
 <script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
   <script>
   let userId = '';
-
+  const LINE_TOKEN = "MCDA7LNbI0SvMGoX6CKeBveY2A3qqIY0WRE3ggWqlqRFxxqnyFo+B6pPN9Jjky5gNWKwdzyohI0Lfru1orWI5dbrL4hxrSW7nfuns5cyazCEqWnXPJFYNuavhr5wMRMgxpI9HkYBJpiL+gQHgeR1QAdB04t89/1O/w1cDnyilFU=";
   document.addEventListener('DOMContentLoaded', async () => {
     try {
       await liff.init({ liffId: '2008333754-ODxKZRr9' });
@@ -169,13 +169,19 @@
     const formData = new FormData(e.target);
     formData.append('userId', userId);
     const data = Object.fromEntries(formData.entries());
-
-    try {
-      const res = await fetch('https://maotopia-api.onrender.com', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data)
-      });
+    console.log(data);
+    try {        
+      const res = await fetch("https://api.line.me/v2/bot/message/push", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${LINE_TOKEN}`
+      },
+      body: JSON.stringify({
+        to: "U592d419aa2916273dc31002d18950a02",
+        messages: [{ type: "text", text: data }]
+      })
+    });
       const result = await res.json();
       alert(result.message || '送出成功！');
       e.target.reset();
@@ -187,6 +193,7 @@
   </script>
 </body>
 </html>
+
 
 
 
