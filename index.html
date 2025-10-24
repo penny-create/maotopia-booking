@@ -240,7 +240,7 @@ document.getElementById('appointmentForm').addEventListener('submit', function(e
   const data = Object.fromEntries(formData.entries());
   data.userId = userId; // 👈 把 LINE userId 一起送到後端
 
-  const WEB_APP_URL = '你的 Google Apps Script 部署網址'; // ⚠️ 改這裡！
+const WEB_APP_URL = 'https://script.google.com/a/macros/maotopia.com/s/AKfycby3ykWOGh8z2j80WyjdnZyf7NA9WIHoYoKt5E7P9mHMYTBKYlqTk-_xCSzyqhGcFA81tw/exec';
 
   fetch(WEB_APP_URL, {
     method: 'POST',
@@ -267,6 +267,7 @@ document.getElementById('appointmentForm').addEventListener('submit', function(e
 
 </body>
 </html>
+
 
 
 
