@@ -142,135 +142,48 @@
         </form>
     </div>
 <script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
-<script>
-  // 初始化 LIFF
+  <script>
+  let userId = '';
+
   document.addEventListener('DOMContentLoaded', async () => {
     try {
-      await liff.init({ liffId: '你的 LIFF ID' });
+      await liff.init({ liffId: '2008333754-ODxKZRr9' });
       console.log('✅ LIFF 初始化成功');
 
-      // 檢查登入狀態
       if (!liff.isLoggedIn()) {
-        liff.login(); // 如果未登入，會跳出 LINE 登入
-      } else {
-        const profile = await liff.getProfile();
-        console.log('使用者資料:', profile);
-        // 例如可在表單內自動填入 LINE 名稱
-        document.getElementById('ownerName').value = profile.displayName;
+        liff.login();
+        return;
       }
+
+      const profile = await liff.getProfile();
+      userId = profile.userId; // ← 傳給後端
+      console.log('使用者 ID:', userId);
+      document.querySelector('input[name="ownerName"]').value = profile.displayName;
     } catch (err) {
       console.error('❌ LIFF 初始化失敗:', err);
     }
   });
-</script>
 
-    <script>
-        document.getElementById('appointmentForm').addEventListener('submit', function(e) {
-            e.preventDefault(); // 阻止表單傳統提交
+  document.getElementById('appointmentForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const formData = new FormData(e.target);
+    formData.append('userId', userId);
+    const data = Object.fromEntries(formData.entries());
 
-            const form = e.target;
-            // 由於有些欄位是多選，使用 FormData 可能更方便處理
-            const formData = new FormData(form);
-            const params = new URLSearchParams();
-            for (const pair of formData.entries()) {
-                // 特別處理多選框，將值合併
-                if (pair[0] === 'missionType' || pair[0] === 'personality' || pair[0] === 'specialBehavior') {
-                    // 如果是第一個值，直接設定；否則，追加
-                    if (params.has(pair[0])) {
-                        params.set(pair[0], params.get(pair[0]) + '、' + pair[1]);
-                    } else {
-                        params.set(pair[0], pair[1]);
-                    }
-                } else {
-                    params.set(pair[0], pair[1]);
-                }
-            }
-            
-            // !!! 替換成您在 Google Apps Script 部署後的 Web App URL !!!
-            const WEB_APP_URL = '您的 Google Apps Script 部署 URL'; 
-
-            fetch(WEB_APP_URL, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded'
-                },
-                body: params.toString()
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.status === 'success') {
-                    alert('登艦預約成功！通知已發送給毛托邦使者。');
-                    form.reset(); // 清空表單
-                } else {
-                    alert('預約失敗，請稍後再試或直接聯繫使者。\n錯誤訊息: ' + data.message);
-                }
-            })
-            .catch(error => {
-                console.error('Fetch error:', error);
-                alert('連線錯誤，請檢查網路或直接聯繫使者。');
-            });
-        });
-<script>
-<script>
-let userId = '';
-
-document.addEventListener('DOMContentLoaded', async () => {
-  try {
-    await liff.init({ liffId: '2008333754-ODxKZRr9' });
-    console.log('✅ LIFF 初始化成功');
-
-    if (!liff.isLoggedIn()) {
-      liff.login();
-      return;
+    try {
+      const res = await fetch('https://script.google.com/a/macros/maotopia.com/s/AKfycby3ykWOGh8z2j80WyjdnZyf7NA9WIHoYoKt5E7P9mHMYTBKYlqTk-_xCSzyqhGcFA81tw/exec', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+      });
+      const result = await res.json();
+      alert(result.message || '送出成功！');
+      e.target.reset();
+    } catch (err) {
+      console.error(err);
+      alert('送出失敗，請稍後再試');
     }
-
-    const profile = await liff.getProfile();
-    userId = profile.userId; // 👈 取得使用者 LINE ID
-    document.getElementById('ownerName').value = profile.displayName || '';
-  } catch (err) {
-    console.error('❌ LIFF 初始化失敗:', err);
-  }
-});
-
-document.getElementById('appointmentForm').addEventListener('submit', function(e) {
-  e.preventDefault();
-
-  const form = e.target;
-  const formData = new FormData(form);
-  const data = Object.fromEntries(formData.entries());
-  data.userId = userId; // 👈 把 LINE userId 一起送到後端
-
-const WEB_APP_URL = 'https://script.google.com/a/macros/maotopia.com/s/AKfycby3ykWOGh8z2j80WyjdnZyf7NA9WIHoYoKt5E7P9mHMYTBKYlqTk-_xCSzyqhGcFA81tw/exec';
-
-  fetch(WEB_APP_URL, {
-    method: 'POST',
-    contentType: 'application/json',
-    body: JSON.stringify(data)
-  })
-  .then(res => res.json())
-  .then(result => {
-    if (result.status === 'success') {
-      alert('登艦預約成功！已通知毛托邦使者 🌟');
-      form.reset();
-    } else {
-      alert('❌ 錯誤：' + result.message);
-    }
-  })
-  .catch(err => {
-    console.error(err);
-    alert('連線失敗，請稍後再試。');
   });
-});
-</script>
-
-
-
+  </script>
 </body>
 </html>
-
-
-
-
-
-
-
