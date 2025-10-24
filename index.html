@@ -211,47 +211,12 @@
             });
         });
 <script>
-<script>
-document.getElementById('appointmentForm').addEventListener('submit', async function(e) {
-    e.preventDefault();
-
-    const formData = new FormData(this);
-    const data = {};
-
-    // 處理多選、單選
-    formData.forEach((value, key) => {
-        if (data[key]) {
-            if (Array.isArray(data[key])) {
-                data[key].push(value);
-            } else {
-                data[key] = [data[key], value];
-            }
-        } else {
-            data[key] = value;
-        }
-    });
-
-    try {
-        const res = await fetch('https://maotopia-booking.onrender.com/booking', {
-            method: 'GET',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(data)
-        });
-
-        const result = await res.json();
-        alert(result.message); // 顯示成功訊息
-        this.reset(); // 清空表單
-    } catch (err) {
-        console.error(err);
-        alert('送出失敗，請稍後再試');
-    }
-});
-</script>
 
 
 
 </body>
 </html>
+
 
 
 
