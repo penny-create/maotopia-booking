@@ -141,6 +141,28 @@
             <button type="submit" class="submit-btn">完成登艦預約</button>
         </form>
     </div>
+<script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
+<script>
+  // 初始化 LIFF
+  document.addEventListener('DOMContentLoaded', async () => {
+    try {
+      await liff.init({ liffId: '你的 LIFF ID' });
+      console.log('✅ LIFF 初始化成功');
+
+      // 檢查登入狀態
+      if (!liff.isLoggedIn()) {
+        liff.login(); // 如果未登入，會跳出 LINE 登入
+      } else {
+        const profile = await liff.getProfile();
+        console.log('使用者資料:', profile);
+        // 例如可在表單內自動填入 LINE 名稱
+        document.getElementById('ownerName').value = profile.displayName;
+      }
+    } catch (err) {
+      console.error('❌ LIFF 初始化失敗:', err);
+    }
+  });
+</script>
 
     <script>
         document.getElementById('appointmentForm').addEventListener('submit', function(e) {
@@ -230,6 +252,7 @@ document.getElementById('appointmentForm').addEventListener('submit', async func
 
 </body>
 </html>
+
 
 
 
