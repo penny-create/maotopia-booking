@@ -24,112 +24,7 @@
                 <label><input type="checkbox" name="missionType" value="狗狗旅館任務"> 狗狗旅館任務（星際住宿）</label>
             </div>
 
-            <div class="form-group">
-                <label for="startDate">📅 登艦日期：</label>
-                <input type="datetime-local" id="startDate" name="startDate" required>
-            </div>
-            
-            <div class="form-group">
-                <label for="endDate">🪐 返回日期：</label>
-                <input type="datetime-local" id="endDate" name="endDate" required>
-            </div>
-
-            <h2>🐾 二、旅客資料（毛孩資訊）</h2>
-            <div class="form-group">
-                <label for="petName">👩‍🚀 毛孩姓名：</label>
-                <input type="text" id="petName" name="petName" required>
-            </div>
-
-            <div class="form-group radio-group">
-                <label>⚧ 性別：</label>
-                <label><input type="radio" name="gender" value="男孩" required> 男孩</label>
-                <label><input type="radio" name="gender" value="女孩"> 女孩</label>
-            </div>
-
-            <div class="form-group radio-group">
-                <label>是否絕育：</label>
-                <label><input type="radio" name="neutered" value="已絕育" required> 已絕育</label>
-                <label><input type="radio" name="neutered" value="未絕育"> 未絕育</label>
-            </div>
-
-            <div class="form-group">
-                <label for="breed">🐕 品種：</label>
-                <input type="text" id="breed" name="breed" required>
-            </div>
-            
-            <div class="form-group">
-                <label for="weight">⚖️ 體重 (kg)：</label>
-                <input type="number" step="0.1" id="weight" name="weight" required>
-            </div>
-            
-            <div class="form-group">
-                <label for="age">🎂 年齡 (歲)：</label>
-                <input type="number" id="age" name="age" required>
-            </div>
-
-            <div class="form-group radio-group">
-                <label>🌈 近期健康狀況：</label><br>
-                <label><input type="radio" name="health" value="健康良好" required> 健康良好</label>
-                <label><input type="radio" name="health" value="有狀況"> 有狀況 (請說明：<input type="text" name="healthDetail" class="inline-input">)</label>
-            </div>
-
-            <div class="form-group checkbox-group">
-                <label>💫 個性檔案 (可複選)：</label><br>
-                <label><input type="checkbox" name="personality" value="活潑外向"> 活潑外向</label>
-                <label><input type="checkbox" name="personality" value="安靜文靜"> 安靜文靜</label>
-                <label><input type="checkbox" name="personality" value="愛吃小饞鬼"> 愛吃小饞鬼</label><br>
-                <label><input type="checkbox" name="personality" value="膽小內向"> 膽小內向</label>
-                <label><input type="checkbox" name="personality" value="警戒敏銳"> 警戒敏銳</label>
-                <label><input type="checkbox" name="personality" value="需要慢熱陪伴"> 需要慢熱陪伴</label><br>
-                <label for="otherPersonality">其他特質：</label>
-                <input type="text" id="otherPersonality" name="otherPersonality" class="inline-input">
-            </div>
-
-            <div class="form-group">
-                <label>⚠️ 是否有特殊行為？</label><br>
-                <label><input type="checkbox" name="specialBehavior" value="護食／護玩具"> 護食／護玩具</label><br>
-                <label><input type="checkbox" name="specialBehavior" value="分離焦慮／吠叫問題"> 分離焦慮／吠叫問題</label><br>
-                <label>其他：<input type="text" name="otherBehavior" class="inline-input"></label>
-            </div>
-
-
-            <h2>👨‍🚀 三、地球飼主資料</h2>
-            <div class="form-group">
-                <label for="ownerName">飼主姓名：</label>
-                <input type="text" id="ownerName" name="ownerName" required>
-            </div>
-            <div class="form-group">
-                <label for="phone">聯絡電話：</label>
-                <input type="tel" id="phone" name="phone" required>
-            </div>
-            <div class="form-group">
-                <label for="address">聯絡地址：</label>
-                <input type="text" id="address" name="address" required>
-            </div>
-
-            <div class="form-group radio-group">
-                <label>是否曾搭乘毛托邦或其他星球旅宿：</label><br>
-                <label><input type="radio" name="experience" value="初次登艦！請多照顧 🥹" required> 初次登艦！請多照顧 🥹</label><br>
-                <label><input type="radio" name="experience" value="有經驗的太空旅客 🛸"> 有經驗的太空旅客 🛸</label>
-            </div>
-            
-            <h2>🧳 四、旅程備註與準備</h2>
-            <div class="form-group radio-group">
-                <label>是否已閱讀《毛托邦住宿須知》：</label><br>
-                <label><input type="radio" name="agreement" value="已閱讀並同意" required> 是，我已了解並同意星際條款 💫</label><br>
-                <label><input type="radio" name="agreement" value="尚未閱讀，請傳給我 🪐"> 尚未閱讀，請傳給我 🪐</label>
-            </div>
-
-            <div class="form-group">
-                <label for="notes">其他備註事項：</label><br>
-                <textarea id="notes" name="notes"></textarea>
-            </div>
-
-            <div class="reminders">
-                <h3>💎 登艦前提醒</h3>
-                <p>✨ 支付定金後，您的登艦席次即完成預約。</p>
-                <p>✨ 旅程前，請準備毛孩平常吃的飼料、點心、玩具或被被，<br>　讓牠在異星也能安心入眠。</p>
-            </div>
+           
 
             <div class="footer-info">
                 <p>毛托邦·小寓所 Maotopia Nook</p>
@@ -179,6 +74,7 @@ document.getElementById("testbutton").addEventListener("click", function () {
   </script>
 </body>
 </html>
+
 
 
 
