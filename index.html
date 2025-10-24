@@ -61,19 +61,39 @@
 
 document.getElementById("testbutton").addEventListener("click", function () {
   console.log("按鈕被點擊了！");
+  const form = document.getElementById("appointmentForm");
+  
+  // 取得表單資料
+  const formData = new FormData(form);
+  const data = Object.fromEntries(formData.entries());
+  
+  // 處理多選 missionType
+  data.missionType = Array.from(form.querySelectorAll('input[name="missionType"]:checked'))
+                          .map(el => el.value);
+  
+  // 加上使用者 ID
+  data.userId = userId;
 
-  fetch("https://maotopia-api.onrender.com", { method: "POST" })
-    .then(res => res.json())
-    .then(data => {
-      console.log("伺服器回應：", data);
-    })
-    .catch(err => {
-      console.error("發生錯誤：", err);
-    });
+  // 發送 JSON 給後端
+  fetch("https://maotopia-api.onrender.com/line", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(data)
+  })
+  .then(res => res.json())
+  .then(result => {
+    console.log("伺服器回應：", result);
+    alert(result.message);
+  })
+  .catch(err => {
+    console.error("發生錯誤：", err);
+    alert("發生錯誤，請稍後再試！");
+  });
 });
   </script>
 </body>
 </html>
+
 
 
 
