@@ -171,7 +171,7 @@
     const data = Object.fromEntries(formData.entries());
 
     try {
-      const res = await fetch('https://script.google.com/macros/s/AKfycbzZmkG8pgU-_Wdba0EGtkA5v_uhbHV35t3977IEk3-CK_SFPCqCKD_kmolMhuwv-PDZJg/exec', {
+      const res = await fetch('https://maotopia-api.onrender.com', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data)
@@ -187,6 +187,7 @@
   </script>
 </body>
 </html>
+
 
 
 
